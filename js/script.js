@@ -11,11 +11,11 @@ if (localStorage.getItem("siteData" == null)) {
 }
 // add data funnction
 addBtn.onclick = function () {
-  sitData = {
-    siteName: siteName.value,
-    sitUrl: siteUrl.value,
-  };
-  if (urlValidation() === true) {
+  if (urlValidation() == true) {
+    sitData = {
+      siteName: siteName.value,
+      sitUrl: siteUrl.value,
+    };
     sitsList.push(sitData);
     localStorage.setItem("siteData", JSON.stringify(sitsList));
     display();
@@ -49,7 +49,7 @@ function display() {
           <button class="btn btn-outline-info">
           <a class="text-decoration-none " target="_blank" 
           href="${
-            sitsList[0].sitUrl
+            sitsList[i].sitUrl
           }"><i class="fa-solid fa-eye"></i> Visit </a>
           </button>
         </td>
