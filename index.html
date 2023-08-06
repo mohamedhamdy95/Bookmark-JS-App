@@ -6,59 +6,98 @@
     <link rel="stylesheet" href="./css/bootstrap.min.css" />
     <link rel="stylesheet" href="./css/all.min.css" />
     <link rel="stylesheet" href="./css/style.css" />
-    <title>Bookmarker</title>
+    <title>Weather APP</title>
   </head>
   <body>
-    <div class="main w-75 mx-auto m-5 p-5 shadow-lg">
-      <h1 class="text-body-emphasis text-center">Bookmarker</h1>
-      <h4 class="text-dark-emphasis m-5 text-center">
-        <i class="fa-solid fa-bookmark text-center"></i> Bookmark your favorite
-        sites
-        <i class="fa-solid fa-bookmark"></i>
-      </h4>
-
-      <label class="text-capitalize fw-bolder"
-        ><i class="fa-solid fa-book-bookmark me-2"></i>Site Name</label
-      >
-      <input
-        type="text"
-        id="sName"
-        class="form-control mb-4"
-        placeholder="Bookmarker Name"
-      />
-      <label class="text-capitalize fw-bolder"
-        ><i class="fa-solid fa-link me-2"></i>Site URL</label
-      >
-      <input
-        type="text"
-        id="sUrl"
-        class="form-control"
-        placeholder="Website URL"
-        onkeyup="urlValidation()"
-      />
-
-      <button
-        type="button"
-        class="btn btn-primary text-capitalize mt-4 rounded-pill px-5"
-        id="add"
-      >
-        Submit
-      </button>
-      <div class="mt-4">
-        <table class="table table-striped text-center">
-          <thead class="table-primary">
-            <tr>
-              <th class="text-capitalize">index</th>
-              <th class="text-capitalize">Website name</th>
-              <th class="text-capitalize">Visit</th>
-              <th class="text-capitalize">Delete</th>
-            </tr>
-          </thead>
-          <tbody id="tBody"></tbody>
-        </table>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand fw-bolder" href="#">Weather App</a>
+        <button
+          class="navbar-toggler d-lg-none"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapsibleNavId"
+          aria-controls="collapsibleNavId"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+          <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active me-5" href="#" aria-current="page"
+                >Home <span class="visually-hidden">(current)</span></a
+              >
+            </li>
+            <li class="nav-item me-5">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item me-5">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item me-5">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item me-5">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="main" id="main">
+        <form action="" class="d-flex m-5">
+          <input
+            type="text"
+            id="searchBox"
+            class="form-control rounded-start-pill"
+            placeholder="Find Your Location"
+          />
+          <button
+            class="btn btn-primary fw-bolder fs-5 py-2 px-5 rounded-end-pill"
+            id="find"
+          >
+            Find...
+          </button>
+        </form>
+        <div class="row main-box mb-5 rounded-4 overflow-hidden">
+          <div class="col-md-6 left" id="toDay"></div>
+          <div class="col-md-6 right" id="right">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="box">
+                  <div class="head text-center py-1 fst-italic">day</div>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="temptcher fs-1 fw-bolder">30C</div>
+                    <img src="images/clear.png" alt="" />
+                  </div>
+                  <div class="status">Sunny</div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="box">
+                  <div class="head text-center py-1 fst-italic">day</div>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="temptcher fs-1 fw-bolder">30C</div>
+                    <img src="images/clear.png" alt="" />
+                  </div>
+                  <div class="status">Sunny</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
+    <footer class="">
+      <div class="container"></div>
+    </footer>
     <script src="./js/script.js"></script>
   </body>
 </html>

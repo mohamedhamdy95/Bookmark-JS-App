@@ -1,76 +1,65 @@
-var siteName = document.getElementById("sName");
-var siteUrl = document.getElementById("sUrl");
-var addBtn = document.getElementById("add");
-var sitsList = [];
-
-if (localStorage.getItem("siteData" == null)) {
-  sitsList = [];
-} else {
-  sitsList = JSON.parse(localStorage.getItem("siteData"));
-  display();
+// API Key: e849834b76364e7481c152915230508
+// e849834b76364e7481c152915230508
+// e849834b76364e7481c152915230508;
+// http://api.weatherapi.com/v1/current.json?key=<e849834b76364e7481c152915230508>&q=London
+// http://api.weatherapi.com/v1/forecast.json?key=<e849834b76364e7481c152915230508>&q=07112&days=7
+// http://api.weatherapi.com/v1/search.json?key=e849834b76364e7481c152915230508&q=london
+// http://api.weatherapi.com/v1/forecast.json?key=e849834b76364e7481c152915230508&q=07112&days=7
+// var searchBox = document.getElementById("searchBox");
+// var cityName = searchBox.value;
+var find = document.getElementById("find");
+var data;
+var temp = "";
+var d = new Date().toDateString();
+var currentDate = new Date();
+var dayOfWeek = currentDate.getDay();
+var days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+var dayName = days[dayOfWeek];
+console.log(dayName);
+async function getWeather(a) {
+  var result = await fetch(
+    `http://api.weatherapi.com/v1/current.json?key=e849834b76364e7481c152915230508&q=${a}&days=3`
+  );
+  var a = await result.json();
+  console.log(a);
+  temp += `
+  <div class="box">
+  <div class="head d-flex justify-content-between p-2 fst-italic">
+    <div class="day">${dayName}</div>
+    <div class="date">${d}</div>
+  </div>
+  <div class="data mx-4">
+    <div class="city fs-4 mt-4">${a.location.name}</div>
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="temptcher fs-1 fw-bolder">${a.current.temp_c}<sup>o</sup>C</div>
+      <img class="w-25" src="${a.current.condition.icon}" alt="icon" />
+    </div>
+    <div class="status">${a.current.condition.text}</div>
+    <div class="icons d-flex justify-content-around mt-5 mb-3">
+      <div class="huew fs-4">
+        <i class="fa-solid fa-umbrella"></i> ${a.current.humidity}%
+      </div>
+      <div class="wind fs-4">
+        <i class="fa-solid fa-wind"></i> ${a.current.wind_kph} Km/h
+      </div>
+      <div class="loca fs-4">
+        <i class="fa-regular fa-compass"></i> East
+      </div>
+    </div>
+  </div>
+</div>
+`;
+  document.getElementById("searchBox").addEventListener("keyup", (a) => {
+    getWeather(a.target.value);
+  });
+  document.getElementById("toDay").innerHTML = temp;
 }
-// add data funnction
-addBtn.onclick = function () {
-  if (urlValidation() == true) {
-    sitData = {
-      siteName: siteName.value,
-      sitUrl: siteUrl.value,
-    };
-    sitsList.push(sitData);
-    localStorage.setItem("siteData", JSON.stringify(sitsList));
-    display();
-    reset();
-  } else {
-    alert("Enter avalid input like : https://www.google.com");
-  }
-  console.log(sitsList);
-};
-// URL Validation
-function urlValidation() {
-  var urlRegex = /^(https:\/\/)(www\.)[a-z|A-Z]+(\.com)$/;
-  var urlTest = siteUrl.value;
-  if (urlRegex.test(urlTest)) {
-    console.log("maaatch");
-    return true;
-  } else {
-    console.log("noo");
-    return false;
-  }
-}
-// display data funnction
-function display() {
-  var trs = ``;
-  for (var i = 0; i < sitsList.length; i++) {
-    trs += `
-      <tr >
-        <td>${i + 1}</td>
-        <td>${sitsList[i].siteName}</td>
-        <td>
-          <button class="btn btn-outline-info">
-          <a class="text-decoration-none " target="_blank" 
-          href="${
-            sitsList[i].sitUrl
-          }"><i class="fa-solid fa-eye"></i> Visit </a>
-          </button>
-        </td>
-        <td>
-          <button class="btn btn-outline-danger" onclick="deleteData(${i})">
-            <i class="fa-solid fa-trash"></i> Delete
-          </button>
-        </td>
-      </tr>   
-    `;
-  }
-  document.getElementById("tBody").innerHTML = trs;
-}
-// delete funnction
-function deleteData(index) {
-  sitsList.splice(index, 1);
-  localStorage.setItem("siteData", JSON.stringify(sitsList));
-  display();
-}
-// reset funnction
-function reset() {
-  siteName.value = "";
-  siteUrl.value = "";
-}
+getWeather("landon");
